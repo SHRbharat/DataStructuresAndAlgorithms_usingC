@@ -37,5 +37,23 @@ int main()
     point2(ptr);
     printf("\tafter point2 : %d",*ptr);
 
+
+    //`````````````````````````````
+    int x = 10;
+    
+    int* px = &x;
+    int** pxx = &px;
+    
+    printf("\n-----------\n");
+    //pxx--> px --> x
+    printf("%d \n",*px);    //value pointed by px , ie value of x
+    printf("%p \n",px);     //address stored at px , ie address of x
+    
+    printf("%p \n",*pxx);   //value pointed by pxx , ie value of px ==> address stored in px ie. address of x
+    
+    
+    printf("%d \n",**pxx);  //value pointed by *(*pxx) , ie value stored in x
+    printf("%p \n",pxx);    //address stored in pxx , ie address of px
+
     return 0;
 }
