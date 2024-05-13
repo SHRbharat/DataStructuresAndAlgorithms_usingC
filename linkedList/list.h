@@ -118,6 +118,7 @@ void delete_after(nodeptr p){
         return;
     }else if(p->next == NULL){
         printf("Error : no node available for deletion - delete_after()\n");
+        return;
     }
 
     //delete node
@@ -178,7 +179,7 @@ void insert_before(nodeptr* list, nodeptr node, int val) {
     if (*list == node) {
         nodeptr newNode = getNode(val);
 
-        newNode->next = (*list)->next;
+        newNode->next = *list;
         *list = newNode;
         return;
     }
@@ -197,7 +198,6 @@ void insert_before(nodeptr* list, nodeptr node, int val) {
     }
 
     nodeptr newNode = getNode(val);
-    // Insert the new node before 'node'
     newNode->next = node;
     prevNode->next = newNode;
 }
@@ -209,37 +209,31 @@ void delete_before(nodeptr* list, nodeptr node) {
         return;
     }
 
-    //if node matched is second node - deleting first node
-    if((*list)->next->next == node){
-        //delete first node
-        nodeptr temp = *list;
-        *list = temp->next;
-        free(temp);
-    }
-
-
-    //if two or more nodes in the ll
     // Initialize slow and fast pointers
     nodeptr slow = NULL;
-    nodeptr fast = *list;
-
-    // Traverse the list until fast pointer reaches the one-before the given node
-    while (fast->next != NULL && fast->next != node) {
+    nodeptr fast = *list;    
+    
+    // Traverse the list until fast pointer reaches just one-before the given node 
+    while (fast->next != node) {
         slow = fast;
         fast = fast->next;
+        
+        if(fast == NULL){
+            printf("Error: Node not found in the list - delete_before()\n");
+            return;
+        }
     }
-    // If the given node is not found
-    if (fast->next == NULL) {
-        printf("Error: Node not found in the list.\n");
-        return;
-    }else if(slow == NULL){
+
+    //fast pointer = node to be deleted
+    //slow pointer = node before the fast pointer
+    if(slow == NULL){
         //node to be deleted is first node
         nodeptr toDelete = fast;
         *list = fast->next;
         free(toDelete);
     }else{
         // Store the node to be deleted
-        nodeptr toDelete = slow->next;
+        nodeptr toDelete = fast;
         // Adjust the pointers to skip the node to be deleted
         slow->next = node;
         free(toDelete);
@@ -247,7 +241,7 @@ void delete_before(nodeptr* list, nodeptr node) {
 }
 
 
-//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 void printList(nodeptr list){
     if(list == NULL){
@@ -299,4 +293,24 @@ void empty_list(nodeptr* list) {
 
     // Set the list pointer to NULL to indicate an empty list
     *list = NULL;
+}
+
+void reverse(nodeptr* list) {
+    // Check if the list is empty or has only one node
+    if (*list == NULL || (*list)->next == NULL) {
+        return; 
+    }
+
+    nodeptr prev = NULL;
+    nodeptr current = *list;
+    nodeptr next = NULL;
+
+    while (current != NULL) {
+        next = current->next;   // Store the next node
+        current->next = prev;   // Reverse the link
+        prev = current;         // Move pointers one position ahead
+        current = next;
+    }
+
+    *list = prev; // Update the head of the list
 }
