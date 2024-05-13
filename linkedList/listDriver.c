@@ -1,4 +1,4 @@
-#include "list1.h"
+#include "list.h"
 
 int main(){
     nodeptr myList = NULL; // Initialize an empty list
