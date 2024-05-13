@@ -179,11 +179,11 @@ int main(){
     delete_before(&myList,find_node(myList,200)); //40->200->50->500->NULL
     printList(myList);
 
-    // nodeptr ptr2;
-    // ptr2->data = 1000;
-    // printf(">>>> no match\t: \n");
-    // delete_before(&myList,ptr2); 
-    // printList(myList);
+    nodeptr ptr2= malloc(sizeof(struct Node));;
+    ptr2->data = 1000;
+    printf(">>>> no match\t: \n");
+    delete_before(&myList,ptr2); 
+    printList(myList);
 
     printf(">>>> last node match\t: \n");
     delete_before(&myList,find_node(myList,500)); //40->200->500->NULL
