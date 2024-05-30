@@ -116,23 +116,3 @@ void printTree(nodeptr root, int space) {
     printTree(root->left, space);
 }
     
-
-
-void printTree(nodeptr root, int space) {
-    if (root == NULL)
-    {
-        return;
-    }
-    space +=5;
-    printTree(root->right, space);
-    printf("\n");
-    for (int i = 5; i < space; i++)
-    {
-        printf(" ");
-    }
-    printf("%c \n", root->info);
-
-    printTree(root->left, space);
-}
-    
-
