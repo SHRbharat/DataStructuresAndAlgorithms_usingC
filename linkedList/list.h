@@ -19,6 +19,8 @@ nodeptr getNode(int val){
     return newNode;
 }
 
+
+
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 
@@ -239,7 +241,21 @@ void delete_before(nodeptr* list, nodeptr node) {
         free(toDelete);
     }
 }
-
+void insSorted(nodeptr *head, int x) {
+    nodeptr q,p;
+    q=NULL;
+    for(p=*head; p!=NULL && x>p->info;p=p->next) {
+        q = p;
+    }
+    if (q == NULL)
+    {
+        insert_front(&p,x);
+    } else
+    {
+        insert_before(&q, x);
+    }
+            
+}
 
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
